@@ -786,7 +786,7 @@ static NTSTATUS fsp_fuse_intf_Create(FSP_FILE_SYSTEM *FileSystem,
     }
     Mode &= ~context->umask;
     if (f->set_create_umask) {
-        if(FILE_DIRECTORY_FILE)
+        if(CreateOptions & FILE_DIRECTORY_FILE) /*correct file permission patch, Dale DuRose */
             Mode = 0777 & ~f->create_umask;
         else
             Mode = 0666 & ~f->create_umask; 
